@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calculator, Download, Calendar, DollarSign, Percent, RefreshCw, FileText } from 'lucide-react';
+import { Calculator, Download, Calendar, IndianRupee, Percent, RefreshCw, FileText } from 'lucide-react';
 
 const App = () => {
   // State
@@ -103,7 +103,7 @@ const App = () => {
   }, [loanAmount, interestRate, loanTermYears, loanType, startDate]);
 
   const formatMoney = (value) => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(value);
   };
 
   const downloadCSV = () => {
@@ -137,7 +137,7 @@ const App = () => {
         <div className="flex items-center gap-3 mb-8">
           <Calculator className="w-10 h-10 text-blue-500" />
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-            Professional Loan Calculator
+            Loan Calculator
           </h1>
         </div>
 
@@ -154,7 +154,7 @@ const App = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-1">Loan Amount</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-2.5 w-5 h-5 text-gray-500" />
+                  <IndianRupee className="absolute left-3 top-2.5 w-5 h-5 text-gray-500" />
                   <input
                     type="number"
                     value={loanAmount}

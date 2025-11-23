@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/your-repo-name/', // REPLACE 'your-repo-name' with your GitHub repository name
+  base: '/LCal/',
 })

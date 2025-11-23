@@ -31,6 +31,10 @@ You can view the live application here: [https://ishtiaqSamdani.github.io/LCal/]
     -   Scroll down to the table to see exactly how much goes to principal vs. interest each month.
 7.  **Download**: Click "Download CSV" to save the schedule.
 
+## Mathematical Formulas
+
+Interested in the math behind the numbers? We believe in transparency. You can find a detailed explanation of the formulas used for both **Standard Amortization** (Annuity) and **Principal First** (Fixed Principal) calculations in our [Mathematical Documentation](./MATH.md).
+
 ## Development & Contribution
 
 For instructions on how to run this project locally, understand the CI/CD pipeline, or contribute to the codebase, please see our [CONTRIBUTING.md](./CONTRIBUTING.md) guide.

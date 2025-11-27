@@ -64,7 +64,7 @@ const LoanControls = ({
               <input
                 type="number"
                 value={loanTermYears}
-                onChange={(e) => setLoanTermYears(Number(e.target.value))}
+                onChange={(e) => setLoanTermYears(e.target.value === '' ? '' : Number(e.target.value))}
                 className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               />
            </div>
@@ -76,7 +76,7 @@ const LoanControls = ({
                   <input
                   type="number"
                   value={monthlyBudget}
-                  onChange={(e) => setMonthlyBudget(Number(e.target.value))}
+                  onChange={(e) => setMonthlyBudget(e.target.value === '' ? '' : Number(e.target.value))}
                   className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
                   />
               </div>

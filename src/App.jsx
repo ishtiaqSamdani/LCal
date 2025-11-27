@@ -7,17 +7,18 @@ import StrategyTab from './components/strategy/StrategyTab';
 import MathFooter from './components/common/MathFooter';
 import Tabs from './components/common/Tabs';
 import { calculateWeightedAverageRate, calculateLoanSchedule, generateCSV } from './utils/loanMath';
+import { usePersistentState } from './hooks/usePersistentState';
 
 const App = () => {
   // Global State
-  const [activeTab, setActiveTab] = useState('calculator');
+  const [activeTab, setActiveTab] = usePersistentState('activeTab', 'calculator');
 
-  // Loan State
-  const [tranches, setTranches] = useState([{ amount: 100000, rate: 5.0 }]);
-  const [loanTermYears, setLoanTermYears] = useState(30);
-  const [loanType, setLoanType] = useState('standard'); 
-  const [monthlyBudget, setMonthlyBudget] = useState(2000);
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
+  // Loan State (Persistent)
+  const [tranches, setTranches] = usePersistentState('tranches', [{ amount: 100000, rate: 5.0 }]);
+  const [loanTermYears, setLoanTermYears] = usePersistentState('loanTermYears', 30);
+  const [loanType, setLoanType] = usePersistentState('loanType', 'standard'); 
+  const [monthlyBudget, setMonthlyBudget] = usePersistentState('monthlyBudget', 2000);
+  const [startDate, setStartDate] = usePersistentState('startDate', new Date().toISOString().split('T')[0]);
 
   // Computed State
   const [schedule, setSchedule] = useState([]);
@@ -64,8 +65,8 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 p-6 md:p-12 font-sans">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-4 md:p-8 lg:p-12 font-sans flex justify-center">
+      <div className="w-full max-w-[1440px]">
         
         {/* Header */}
         <div className="flex flex-col items-center mb-10 text-center">
@@ -73,7 +74,7 @@ const App = () => {
             <div className="bg-blue-600/20 p-3 rounded-2xl">
                 <Calculator className="w-8 h-8 text-blue-500" />
             </div>
-            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+            <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                 Financial Decision Engine
             </h1>
           </div>
@@ -84,25 +85,27 @@ const App = () => {
         <Tabs activeTab={activeTab} onTabChange={setActiveTab} />
 
         {/* Main Content Area */}
-        <div className="animate-in fade-in duration-500">
+        <div className="animate-in fade-in duration-500 w-full">
             {activeTab === 'calculator' ? (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
                     {/* Left Column: Controls */}
-                    <LoanControls 
-                        tranches={tranches}
-                        setTranches={setTranches}
-                        loanTermYears={loanTermYears}
-                        setLoanTermYears={setLoanTermYears}
-                        startDate={startDate}
-                        setStartDate={setStartDate}
-                        loanType={loanType}
-                        setLoanType={setLoanType}
-                        monthlyBudget={monthlyBudget}
-                        setMonthlyBudget={setMonthlyBudget}
-                    />
+                    <div className="lg:col-span-4 xl:col-span-3">
+                        <LoanControls 
+                            tranches={tranches}
+                            setTranches={setTranches}
+                            loanTermYears={loanTermYears}
+                            setLoanTermYears={setLoanTermYears}
+                            startDate={startDate}
+                            setStartDate={setStartDate}
+                            loanType={loanType}
+                            setLoanType={setLoanType}
+                            monthlyBudget={monthlyBudget}
+                            setMonthlyBudget={setMonthlyBudget}
+                        />
+                    </div>
 
                     {/* Right Column: Results */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-8 xl:col-span-9 space-y-6">
                         <LoanSummary summary={summary} loanType={loanType} />
                         <AmortizationTable schedule={schedule} onDownload={handleDownload} />
                     </div>

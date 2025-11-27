@@ -43,7 +43,7 @@ const TrancheInput = ({ tranches, setTranches }) => {
                     type="number"
                     placeholder="Amount"
                     value={tranche.amount}
-                    onChange={(e) => updateTranche(index, 'amount', e.target.value)}
+                    onChange={(e) => updateTranche(index, 'amount', e.target.value === '' ? '' : Number(e.target.value))}
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 pl-9 pr-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
                 />
             </div>
@@ -54,7 +54,7 @@ const TrancheInput = ({ tranches, setTranches }) => {
                     placeholder="Rate"
                     step="0.1"
                     value={tranche.rate}
-                    onChange={(e) => updateTranche(index, 'rate', e.target.value)}
+                    onChange={(e) => updateTranche(index, 'rate', e.target.value === '' ? '' : Number(e.target.value))}
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 pl-7 pr-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
                 />
             </div>

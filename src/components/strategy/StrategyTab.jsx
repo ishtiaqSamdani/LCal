@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, DollarSign, ArrowRight } from 'lucide-react';
 import { calculateLoanSchedule } from '../../utils/loanMath';
+import { usePersistentState } from '../../hooks/usePersistentState';
 
 const StrategyTab = ({ totalLoanAmount, effectiveRate, loanTermYears, loanType, monthlyBudget }) => {
-  // Strategy Inputs
-  const [assetValue, setAssetValue] = useState(5000000);
-  const [assetGrowthRate, setAssetGrowthRate] = useState(5.0);
-  const [investmentReturnRate, setInvestmentReturnRate] = useState(12.0);
+  // Strategy Inputs (Persistent)
+  const [assetValue, setAssetValue] = usePersistentState('strategy_assetValue', 5000000);
+  const [assetGrowthRate, setAssetGrowthRate] = usePersistentState('strategy_assetGrowthRate', 5.0);
+  const [investmentReturnRate, setInvestmentReturnRate] = usePersistentState('strategy_investmentReturnRate', 12.0);
   
   // Results State
   const [result, setResult] = useState(null);
@@ -101,7 +102,7 @@ const StrategyTab = ({ totalLoanAmount, effectiveRate, loanTermYears, loanType, 
                         <input
                             type="number"
                             value={assetValue}
-                            onChange={(e) => setAssetValue(Number(e.target.value))}
+                            onChange={(e) => setAssetValue(e.target.value === '' ? '' : Number(e.target.value))}
                             className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 pl-9 pr-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
                         />
                     </div>
@@ -112,7 +113,7 @@ const StrategyTab = ({ totalLoanAmount, effectiveRate, loanTermYears, loanType, 
                         type="number"
                         step="0.1"
                         value={assetGrowthRate}
-                        onChange={(e) => setAssetGrowthRate(Number(e.target.value))}
+                        onChange={(e) => setAssetGrowthRate(e.target.value === '' ? '' : Number(e.target.value))}
                         className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
                     />
                 </div>
@@ -122,7 +123,7 @@ const StrategyTab = ({ totalLoanAmount, effectiveRate, loanTermYears, loanType, 
                         type="number"
                         step="0.1"
                         value={investmentReturnRate}
-                        onChange={(e) => setInvestmentReturnRate(Number(e.target.value))}
+                        onChange={(e) => setInvestmentReturnRate(e.target.value === '' ? '' : Number(e.target.value))}
                         className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
                     />
                     <p className="text-xs text-gray-500 mt-1">Return on SIPs/Funds (Scenario B)</p>

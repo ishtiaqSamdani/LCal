@@ -47,7 +47,7 @@ const LoanControls = ({
                   : 'text-gray-300 hover:text-white'
               }`}
             >
-              Budget Based
+              Principal First
             </button>
           </div>
           <p className="text-xs text-gray-500 mt-2 leading-relaxed">

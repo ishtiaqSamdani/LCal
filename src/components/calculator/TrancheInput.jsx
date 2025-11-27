@@ -52,6 +52,7 @@ const TrancheInput = ({ tranches, setTranches }) => {
                 <input
                     type="number"
                     placeholder="Rate"
+                    title="Annual Rate %"
                     step="0.1"
                     value={tranche.rate}
                     onChange={(e) => updateTranche(index, 'rate', e.target.value === '' ? '' : Number(e.target.value))}

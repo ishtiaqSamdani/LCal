@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+  /* display: flex; */
+  width: 100dvw;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

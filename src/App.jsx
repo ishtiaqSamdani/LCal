@@ -54,7 +54,18 @@ const App = () => {
         monthlyBudget
     );
     
-    const filename = `Loan_Analysis_${new Date().toISOString().split('T')[0]}.csv`;
+    // Generate dynamic filename based on inputs
+    let filename = '';
+    
+    if (loanType === 'standard') {
+        filename = `StandardLoan_${totalLoanAmount}_${effectiveRate.toFixed(1)}pc_${loanTermYears}yr`;
+    } else {
+        filename = `PrincipalFirst_${totalLoanAmount}_${effectiveRate.toFixed(1)}pc_Budget${monthlyBudget}`;
+    }
+    
+    // Sanitize filename (remove potential issues) and add date
+    filename = filename.replace(/[^\w\d_\-]/g, '') + `_${new Date().toISOString().split('T')[0]}.csv`;
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -66,7 +77,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-4 md:p-8 lg:p-12 font-sans flex justify-center">
-      <div className="w-full max-w-[1440px]">
+      <div className="w-full max-w-7xl">
         
         {/* Header */}
         <div className="flex flex-col items-center mb-10 text-center">
@@ -122,7 +133,17 @@ const App = () => {
         </div>
 
         {/* Educational Footer */}
-        <MathFooter />
+        <MathFooter 
+            currentLoanAmount={totalLoanAmount} 
+            currentRate={effectiveRate} 
+            currentBudget={monthlyBudget}
+            loanType={loanType}
+            // For now, we'll use default values for the footer example if the state isn't fully lifted
+            // Ideally, lift the StrategyTab state to App to pass live values here
+            assetValue={5000000} 
+            growthRate={5}
+            returnRate={12}
+        />
 
       </div>
     </div>

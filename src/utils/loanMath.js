@@ -3,6 +3,7 @@ export const calculateWeightedAverageRate = (tranches) => {
   if (totalAmount === 0) return 0;
 
   const weightedSum = tranches.reduce((sum, t) => {
+    // t.rate is Monthly Rate
     return sum + ((parseFloat(t.amount) || 0) * (parseFloat(t.rate) || 0));
   }, 0);
 
@@ -11,7 +12,8 @@ export const calculateWeightedAverageRate = (tranches) => {
 
 export const calculateLoanSchedule = (loanAmount, interestRate, loanTermYears, loanType, startDate, monthlyBudget) => {
   const principal = parseFloat(loanAmount) || 0;
-  const rate = (parseFloat(interestRate) || 0) / 100 / 12;
+  // interestRate is Annual Rate (e.g. 5.5%), convert to Monthly Decimal
+  const rate = (parseFloat(interestRate) || 0) / 100 / 12; 
   const start = new Date(startDate);
 
   let newSchedule = [];
